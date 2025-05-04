@@ -8,7 +8,6 @@
 import UIKit
 import RxSwift
 import Kingfisher
-import SwiftUICore
 
 class Sepet: UIViewController {
     var sepetViewModel = SepetViewModel()
@@ -155,22 +154,16 @@ extension Sepet: UITableViewDelegate, UITableViewDataSource {
 
 extension Sepet: SepetHucreDelegate {
     func urunuSil(sepetId: Int, kullaniciAdi: String) {
-       
+        let itemIsBeingDeleted = sepetListesi.first(where: { $0.sepetId == sepetId })
         
         sepetViewModel.urunuSil(sepetId: sepetId, kullaniciAdi: kullaniciAdi)
-        self.urunlerTableView.reloadData()
+        
         if let index = sepetListesi.firstIndex(where: { $0.sepetId == sepetId }) {
             sepetListesi.remove(at: index)
-          
             urunlerTableView.deleteRows(at: [IndexPath(row: index, section: 0)], with: .fade)
             
             if sepetListesi.isEmpty {
-                withAnimation {
-                    UIView.animate(withDuration: 2) {
-                        self.urunlerTableView.backgroundView?.isHidden = false
-                    }
-                }
-               
+                self.urunlerTableView.backgroundView?.isHidden = false
                 ToplamFiyatLabel.text = "₺0"
                 kargoLabel.text = "0 ₺"
             } else {

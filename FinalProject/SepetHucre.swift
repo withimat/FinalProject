@@ -6,18 +6,27 @@
 //
 
 import UIKit
+protocol SepetHucreDelegate: AnyObject {
+    func urunuSil(sepetId: Int, kullaniciAdi: String)
+}
 
 class SepetHucre: UITableViewCell {
 
-    override func awakeFromNib() {
-        super.awakeFromNib()
-        // Initialization code
+    @IBOutlet weak var ImageView: UIImageView!
+    @IBOutlet weak var LabelAd: UILabel!
+    @IBOutlet weak var LabelFiyat: UILabel!
+    @IBOutlet weak var LabelAdet: UILabel!
+    @IBOutlet weak var LabelToplamFiyat: UILabel!
+
+    weak var delegate: SepetHucreDelegate?
+    var sepetId: Int?
+    var kullaniciAdi = "imat"
+
+    @IBAction func TrashButton(_ sender: Any) {
+        if let id = sepetId {
+            
+            delegate?.urunuSil(sepetId: id, kullaniciAdi: kullaniciAdi)
+ 
+        }
     }
-
-    override func setSelected(_ selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
-
-        // Configure the view for the selected state
-    }
-
 }
