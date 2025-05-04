@@ -3,8 +3,8 @@
 //  FinalProject
 //
 //  Created by İmat Gökaslan on 27.04.2025.
-//
-
+// tasındı
+ 
 import UIKit
 protocol SepetHucreDelegate: AnyObject {
     func urunuSil(sepetId: Int, kullaniciAdi: String)
